@@ -561,31 +561,66 @@
   border: none;
 }
 
-/* ── LIFE GRID ── */
+
+/* ── LIFE GRID (Scrollable Version) ── */
 .life-grid {
   display: flex;
-  flex-direction: row;
   gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 20px; /* Space for the scrollbar */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   align-items: stretch;
 }
 
+/* Custom Scrollbar to match your reference */
+.life-grid::-webkit-scrollbar {
+  height: 4px;
+}
+.life-grid::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 2px;
+}
+.life-grid::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 2px;
+}
+
 .life-card {
-  flex: 1;
+  /* Using fixed width so they don't shrink */
+  min-width: 320px; 
+  max-width: 320px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-
-.life-card--tall {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 
 .life-card:hover {
+  background: var(--surface2);
   border-color: var(--border2);
-  box-shadow: 0 4px 24px rgba(78,168,222,0.08);
+  box-shadow: 0 4px 24px rgba(78,168,222,0.1);
 }
+
+/* Wide card variant if you want one to be bigger */
+.life-card--wide {
+  min-width: 450px;
+  max-width: 450px;
+}
+
+/* Desktop: Keep the scroll or switch to a grid? 
+   If you want to KEEP the scroll on desktop, remove the media query below. 
+   If you want it to stop scrolling and become a grid on desktop, keep this: */
+@media (min-width: 1024px) {
+  /* .life-grid { overflow-x: visible; flex-wrap: wrap; } */
+}
+
 
 .life-photos {
   position: relative;
@@ -751,7 +786,7 @@
       </div>
       <div class="card-title">Far-field Heat Transfer in Non-reciprocal Systems</div>
       <div class="card-org">ICFO – The Institute of Photonic Sciences</div>
-      <p class="card-body">Developed a numerical algorithm to simulate radiative heat transfer between non-planar bodies made of non-reciprocal materials. These findings open new avenues for thermal management and provide design principles for nonreciprocal photonic devices.</p>
+      <p class="card-body">Investigated the far-field consequences of violating Kirchhoff’s law developing a specular ray-tracing algorithm. By lifting the intrinsic coupling constraints between emission and absorption, we achieved precise control over one-way radiative transport and rotational heat fluxes for advanced thermal management.</p>
       <div class="card-tags">
         <span class="tag">Thermal Photonics</span>
         <span class="tag">Numerical Methods</span>
