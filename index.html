@@ -1,56 +1,991 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Coming Soon</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: #0d1117; /* GitHub's Dark Mode Color */
-            color: #c9d1d9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .container {
-            border: 1px solid #30363d;
-            padding: 2rem;
-            border-radius: 6px;
-            background-color: #161b22;
-        }
-        h1 {
-            color: #58a6ff;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #8b949e;
-            font-size: 1.1rem;
-        }
-        .spinner {
-            border: 4px solid rgba(88, 166, 255, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: #58a6ff;
-            animation: spin 1s ease infinite;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guillem Masdemont Serra</title>
+
+  <!-- Computer Modern (LaTeX default font) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/fonts/Serif/cmun-serif.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #060d1a;
+      --bg2:       #0b1628;
+      --surface:   #0f1e35;
+      --surface2:  #132340;
+      --border:    #1e3355;
+      --border2:   #254070;
+      --ink:       #dce8f5;
+      --ink2:      #8faac8;
+      --accent:    #4ea8de;
+      --accent2:   #7ecfff;
+      --glow:      rgba(78, 168, 222, 0.18);
+      --serif:     'Computer Modern Serif', 'CMU Serif', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.7;
+      font-size: 15.5px;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 32px 100px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: rise 0.8s ease forwards 0.1s;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 28px;
+    }
+
+  .avatar {
+    width: 400px;  /* change this */
+    height: 400px; /* and this */
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 36px rgba(78,168,222,0.22);
+    object-position: 50% 50%; /* first value = left/right, second = up/down */
+    border: 2px solid var(--accent); 
+  }
+    .avatar-placeholder {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 36px rgba(78,168,222,0.15);
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent2);
+    }
+
+    .hero-tagline {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      margin-bottom: 28px;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--ink2);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      background: var(--surface);
+      transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .hero-links a:hover {
+      color: var(--accent2);
+      border-color: var(--accent);
+      background: var(--surface2);
+      box-shadow: 0 0 14px var(--glow);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 52px;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    section.visible {
+      animation: rise 0.55s ease forwards;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: #a0bdd6;
+      max-width: 660px;
+    }
+
+    /* ── ENTRY CARDS ── */
+    .entries { display: flex; flex-direction: column; gap: 16px; }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 20px;
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px; /* was 0 6px 6px 0 */
+      transition: background 0.2s, box-shadow 0.2s, border-left-color 0.2s;
+    }
+
+    .entry:hover {
+      background: var(--surface2);
+      border-left-color: var(--accent2);
+      box-shadow: 0 4px 28px rgba(78,168,222,0.1);
+    }
+
+    .entry-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;   /* was 1.05rem */
+      font-weight: 400;    /* was 400 */
+      color: var(--ink);
+      grid-column: 1;
+      line-height: 1.3;
+    }
+
+    .entry-org {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--accent);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      grid-column: 1;
+      margin: 5px 0 8px;
+    }
+    .entry-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink2);
+      opacity: 0.7;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: start;
+      padding-top: 3px;
+      white-space: nowrap;
+      text-align: right;
+    }
+    .entry-body {
+      font-family: var(--serif);
+      font-size: 13.5px;
+      color: #7a9dbf;
+      line-height: 1.75;
+      grid-column: 1 / -1;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 300;
+      color: var(--accent);
+      background: rgba(78,168,222,0.07);
+      border: 1px solid rgba(78,168,222,0.22);
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-top: 8px;
+      margin-right: 5px;
+      letter-spacing: 0.07em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 14px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 18px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .skill-card:hover {
+      background: var(--surface2);
+      box-shadow: 0 2px 18px rgba(78,168,222,0.08);
+    }
+    .skill-card-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 9px;
+    }
+    .skill-card-content {
+      font-family: var(--serif);
+      font-size: 13.5px;
+      color: var(--ink2);
+      line-height: 1.65;
+    }
+
+    /* ── INTERESTS ── */
+    .interests { display: flex; flex-direction: column; gap: 10px; }
+    .interest-pill {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .interest-pill:hover { background: var(--surface2); }
+    .interest-pill .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .interest-pill p {
+      font-family: var(--serif);
+      font-size: 14px;
+      color: #7a9dbf;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--ink2);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+    footer a { color: var(--accent); text-decoration: none; opacity: 1; }
+    footer a:hover { color: var(--accent2); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 580px) {
+      .entry { grid-template-columns: 1fr; }
+      .entry-date { grid-column: 1; grid-row: auto; text-align: left; margin-bottom: 2px; }
+      .page 
+      { padding: 48px 20px 80px; }
+    }
+
+    /* ── THESIS CARDS ── */
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .thesis-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px;
+      background: rgba(78,168,222,0.05);
+      border: 1px solid rgba(78,168,222,0.2);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--ink2);
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .thesis-card:hover {
+      background: rgba(78,168,222,0.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 14px var(--glow);
+      color: var(--accent2);
+    }
+    .thesis-card-image {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .thesis-card-bottom {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .thesis-card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .thesis-card-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .thesis-card-title {
+      font-family: var(--serif);
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--ink2);
+    }
+    .thesis-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── SCROLLABLE CARDS ── */
+  .cards-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cards-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+  .cards-scroll::-webkit-scrollbar-track {
+    background: var(--surface);
+    border-radius: 2px;
+  }
+  .cards-scroll::-webkit-scrollbar-thumb {
+    background: var(--border2);
+    border-radius: 2px;
+  }
+
+  .card {
+    min-width: 280px;
+    max-width: 280px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scroll-snap-align: start;
+    transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .card:hover {
+    background: var(--surface2);
+    border-color: var(--border2);
+    box-shadow: 0 4px 24px rgba(78,168,222,0.1);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card-date {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink2);
+    opacity: 0.6;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .card-org {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+  .card-body {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: #7a9dbf;
+    line-height: 1.7;
+    flex: 1;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 4px;
+    transition: color 0.2s;
+  }
+  .card-link:hover {
+    color: var(--accent2);
+  }
+  
+  .card-links {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+
+.card--wide {
+  min-width: 420px;
+  max-width: 420px;
+}
+
+.card-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 4px 0;
+  background: #000;
+}
+
+.life-video {
+  min-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.life-video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card-video iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+/* ── LIFE GRID ── */
+.life-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.life-card {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.life-card--tall {
+  flex: 1;
+}
+
+.life-card:hover {
+  border-color: var(--border2);
+  box-shadow: 0 4px 24px rgba(78,168,222,0.08);
+}
+
+.life-photos {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--surface2);
+}
+
+.life-card--tall .life-photos {
+  aspect-ratio: 1 / 1;
+}
+
+.life-photos {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface2);
+}
+
+.life-photos-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: none; 
+}
+
+.life-photos-track img,
+.life-photos-track .life-video {
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.life-video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+
+.life-prev, .life-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(6, 13, 26, 0.6);
+  border: 1px solid var(--border2);
+  color: var(--ink2);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+  z-index: 2;
+}
+.life-prev { left: 8px; }
+.life-next { right: 8px; }
+.life-prev:hover, .life-next:hover {
+  background: rgba(78,168,222,0.25);
+  color: var(--accent2);
+}
+
+.life-card-text {
+  padding: 14px 16px;
+}
+.life-card-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+}
+.life-card-text p {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.life-card-text strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+
+@media (max-width: 580px) {
+  .life-grid { grid-template-columns: 1fr; }
+  .life-card--tall { grid-row: span 1; }
+}
+
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1></h1>
-        <p>Working on my current portfolio.</p>
-        <div class="spinner"></div>
+  
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="avatar-wrap">
+      <img class="avatar" src="images/profile/avatar.jpg" alt="Guillem Masdemont Serra"> 
     </div>
+
+
+    <h1 class="hero-name">Guillem Masdemont Serra </h1>
+<div class="hero-links">
+  <a href="mailto:guillem.masdemont01@estudiant.upf.edu">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    guillem.masdemont01@estudiant.upf.edu
+  </a>
+  <a href="#">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    Ljubljana, Slovenia
+  </a>
+</div>
+  </header>
+
+
+  <!-- EDUCATION -->
+  <section data-delay="1">
+    <div class="section-label">Education</div>
+    <div class="entries">
+
+    <div class="entry">
+      <div class="entry-title">Erasmus Mundus Joint Master's in Artificial Intelligence (EMAI)</div>
+      <div class="entry-org">Sapienza Università di Roma · University of Ljubljana · Universitat Pompeu Fabra</div>
+      <div class="entry-date">Sept 2025 – Present</div>
+      <div class="entry-body">
+        <span class="tag">AI Research</span>
+        <span class="tag">Italy · Slovenia · Spain</span>
+        <span class="tag">< 2% acceptance rate</span>
+        <span class="tag">Full Tuition Scholarship</span>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="entry-title">Bachelor's in Mathematics &amp; Physics</div>
+      <div class="entry-org">Autonomous University of Barcelona (UAB)</div>
+      <div class="entry-date">Sept 2020 – Sept 2025</div>
+      <div class="entry-body">
+        <span class="tag">Double Degree</span>
+        <span class="tag">Highest Honors — Maths Thesis</span>
+      </div>
+    </div>
+  </section>
+
+<!-- RESEARCH & PROJECTS -->
+<section data-delay="2">
+  <div class="section-label">Current Research</div>
+  <div class="cards-scroll">
+
+<div class="card">
+      <div class="card-top">
+        <span class="card-label">Thermal Photonics</span>
+        <span class="card-date">July 2024 – Present</span>
+      </div>
+      <div class="card-title">Far-field Heat Transfer in Non-reciprocal Systems</div>
+      <div class="card-org">ICFO – The Institute of Photonic Sciences</div>
+      <p class="card-body">Developed a numerical algorithm to simulate radiative heat transfer between non-planar bodies made of non-reciprocal materials. These findings open new avenues for thermal management and provide design principles for nonreciprocal photonic devices.</p>
+      <div class="card-tags">
+        <span class="tag">Thermal Photonics</span>
+        <span class="tag">Numerical Methods</span>
+        <span class="tag">La Pedrera Fellowship</span>
+      </div>
+      <div class="card-links">
+        <a class="card-link" href="https://github.com/GuillemMasdemont/Nonreciprocal-Cavity-Paper.git" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          GitHub
+        </a>
+        <a class="card-link" href="https://arxiv.org/abs/2602.17313" target="_blank">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Paper
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <span class="card-label">Machine Learning</span>
+        <span class="card-date">2025 – Present</span>
+      </div>
+      <div class="card-title">RAG System for Information Extraction from the Gaia Telescope</div>
+      <div class="card-org">Erasmus Mundus AI Master's (EMAI)</div>
+      <p class="card-body"> Retrieval-augmented generation system to query and extract structured information from the ESA Gaia telescope catalogue, combining large language models with astronomical data pipelines. In collaboration with Prof. Mercè Romero-Gómez (University of Barcelona).</p>
+      <div class="card-tags">
+        <span class="tag">RAG</span>
+        <span class="tag">LLMs</span>
+        <span class="tag">Astrophysics</span>
+        <span class="tag">NLP</span>
+      </div>
+      <a class="card-link" href="https://github.com/YOUR_USERNAME/YOUR_REPO" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        Under development
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PAST PROJECTS -->
+<section data-delay="3">
+  <div class="section-label">Past Projects</div>
+  <div class="cards-scroll">
+
+    <div class="card">
+    <div class="card-top">
+      <span class="card-label">Mathematics Thesis</span>
+      <span class="card-date">2024 – 2025</span>
+    </div>
+    <div class="card-title">Spectral Methods for 2D Incompressible Flows</div>
+    <div class="card-org">Autonomous University of Barcelona (UAB)</div>
+    <img class="card-image" src="images/research/fluid-dynamics-thesis.png" alt="Fluid Dynamics Thesis">
+    <img class="card-image" src="images/research/fluid-dynamics-animation.gif" alt="Orbit Maneuver Simulation">
+    <p class="card-body">Application of a spectral method to two-dimensional incompressible flows in a rectangular domain. Awarded Highest Honors. Supervised by Prof. Jezabel Curbelo (UPC).</p>
+    <div class="card-tags">
+      <span class="tag">Fluid Dynamics</span>
+      <span class="tag">Spectral Methods</span>
+      <span class="tag">Highest Honors</span>
+    </div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/GuillemMasdemont/BA-thesis-Aplicacio-fluxos-metodes-espectrals.git" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+
+    <div class="card">
+  <div class="card-top">
+    <span class="card-label">Reinforcement Learning</span>
+    <span class="card-date">2025</span>
+  </div>
+  <div class="card-title">Spacecraft Orbit Maneuver – RL Gym Environment</div>
+  <div class="card-org">Universitat Pompeu Fabra (UPF)</div>
+  <img class="card-image" src="https://github.com/GuillemMasdemont/RL-OrbitManuever-GYM/raw/main/simulations/model1_simulation1.gif" alt="Orbit Maneuver Simulation">
+  <p class="card-body">Custom Gymnasium environment where a PPO agent learns to maneuver a spacecraft from a low circular orbit to a geostationary one using thrust and rotation actions.</p>
+  <div class="card-tags">
+    <span class="tag">Reinforcement Learning</span>
+    <span class="tag">PPO</span>
+    <span class="tag">Astrodynamics</span>
+    <span class="tag">Python</span>
+  </div>
+  <div class="card-links">
+    <a class="card-link" href="https://github.com/GuillemMasdemont/RL-OrbitManuever-GYM" target="_blank">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      GitHub
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-top">
+    <span class="card-label">Mathematics Research</span>
+    <span class="card-date">July – Sept 2023</span>
+  </div>
+  <div class="card-title">Complex Exponential Dynamical Systems</div>
+  <div class="card-org">Centre de Recerca Matemàtica (CRM) · BGSMath</div>
+  <img class="card-image" src="images/research/complex-dynamics.png" alt="Complex Dynamics">
+<p class="card-body">Part of the BIMR 2023 program. Understanding the topology of escaping sets generated by the complex exponential family, working through Eremenko's 1989 proof that every component of the escaping set of a transcendental entire function is unbounded. Supervised by Prof. Núria Fagella and Prof. Xavier Jarque (University of Barcelona).</p>
+  <div class="card-tags">
+    <span class="tag">Complex Dynamics</span>
+    <span class="tag">Topology</span>
+  </div>
+  <div class="card-links">
+    <a class="card-link" href="http://www.math.stonybrook.edu/~bishop/classes/math627.S13/Eremenko-Banach.pdf" target="_blank">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Eremenko (1989)
+    </a>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-top">
+    <span class="card-label">Science Communication</span>
+    <span class="card-date">2023</span>
+  </div>
+  <div class="card-title">Mathematics Animation Video</div>
+  <div class="card-org">University Mathematics Video Competition · UAB</div>
+  <img class="card-image" src="images/research/mathematics-video-thumbnail.png" alt="Mathematics Video Competition">
+  <p class="card-body">Mathematical animation produced for a university video competition, built entirely with Manim (the Python library behind 3Blue1Brown). The video is split into twelve animated scenes. Awarded best video at the Autonomous University of Barcelona. Voice: Judith Pinazo.</p>
+  <div class="card-tags">
+    <span class="tag">Manim</span>
+    <span class="tag">Python</span>
+    <span class="tag">Science Communication</span>
+    <span class="tag">Best Video — UAB Faculty of Sciences</span>
+  </div>
+  <div class="card-links">
+    <a class="card-link" href="https://github.com/GuillemMasdemont/Mathematics-manim-video" target="_blank">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      GitHub
+    </a>
+    <a class="card-link" href="https://www.youtube.com/watch?v=ent_SkPIj4I" target="_blank">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Watch
+    </a>
+  </div>
+</div>
+</section>
+
+
+<!-- BEYOND ACADEMIA -->
+<section data-delay="6">
+  <div class="section-label">Beyond Academia</div>
+
+  <div class="life-grid">
+
+    <div class="life-card">
+      <div class="life-photos">
+        <div class="life-photos-track" id="track-music">
+          <img src="images/music/music-2.jpg" alt="Music" style="object-position: center 70%;">
+          <img src="images/music/music-3.png" alt="Music">
+          <div class="life-video">
+            <video controls>
+              <source src="images/music/music-1.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <button class="life-prev" onclick="scrollTrack('track-music', -1)">&#8592;</button>
+        <button class="life-next" onclick="scrollTrack('track-music', 1)">&#8594;</button>
+      </div>
+      <div class="life-card-text">
+        <span class="life-card-label">Music</span>
+        <p>Violist with Camerata Bacasis Orchestra. Formerly with the Vienna University Philharmonic and JOSV.</p>
+      </div>
+    </div>
+
+    <div class="life-card">
+      <div class="life-photos">
+        <div class="life-photos-track" id="track-hiking">
+          <img src="images/hiking/hiking-1.jpg" alt="Hiking" style="object-position: center 70%;">
+          <img src="images/hiking/hiking-5.jpg" alt="Hiking" style="object-position: center 30%;">
+          <img src="images/hiking/hiking-3.jpg" alt="Hiking" style="object-position: 50% 85%;">
+        </div>
+        <button class="life-prev" onclick="scrollTrack('track-hiking', -1)">&#8592;</button>
+        <button class="life-next" onclick="scrollTrack('track-hiking', 1)">&#8594;</button>
+      </div>
+      <div class="life-card-text">
+        <span class="life-card-label">Hiking & Sport</span>
+        <p>I enjoy hiking with friends and practicing sports throughout the year.</p>
+      </div>
+    </div>
+
+    <div class="life-card">
+      <div class="life-photos">
+        <div class="life-photos-track" id="track-friends">
+          <img src="images/catalonia/catalonia-3.jpg" alt="Hiking" style="object-position: center 70%;">
+          <img src="images/catalonia/catalonia-1.jpg" alt="Friends">
+          <img src="images/catalonia/catalonia-2.jpg" alt="Friends">
+          <div class="life-video">
+            <video controls>
+              <source src="images/catalonia/catalonia-video.mov" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <button class="life-prev" onclick="scrollTrack('track-friends', -1)">&#8592;</button>
+        <button class="life-next" onclick="scrollTrack('track-friends', 1)">&#8594;</button>
+      </div>
+      <div class="life-card-text">
+        <span class="life-card-label">Catalonia & Friends</span>
+        <p>I was born in Catalonia, the culture and the people of this place have shaped my identity.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  const sections = document.querySelectorAll('section[data-delay]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.style.animationDelay = (parseFloat(el.dataset.delay) * 0.07) + 's';
+        el.classList.add('visible');
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => observer.observe(s));
+
+function scrollTrack(id, dir) {
+  const track = document.getElementById(id);
+  const total = track.children.length;
+  const current = parseInt(track.dataset.index || 0);
+  const next = (current + dir + total) % total;
+  track.dataset.index = next;
+  track.style.transform = `translateX(-${next * 100}%)`;
+}
+
+</script>
+
 </body>
 </html>
