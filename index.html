@@ -56,10 +56,24 @@
       z-index: 10;
       background: var(--bg);
       display: flex;
-      justify-content: flex-end;
+      align-items: center;
       gap: 22px;
       padding: 14px 0;
       margin-bottom: 28px;
+    }
+
+    .nav-name {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink);
+    }
+    .nav-name strong { font-weight: 700; }
+
+    .nav-links {
+      display: flex;
+      margin-left: auto;
+      gap: 22px;
     }
 
     .tab-btn {
@@ -86,7 +100,8 @@
     }
 
     @media (max-width: 580px) {
-      .top-nav { justify-content: center; gap: 16px; flex-wrap: wrap; }
+      .top-nav { flex-direction: column; align-items: center; gap: 10px; }
+      .nav-links { margin-left: 0; gap: 16px; }
     }
 
     /* ── PANELS ── */
@@ -298,9 +313,12 @@
 
   <!-- DISCRETE TOP-RIGHT NAV -->
   <nav class="top-nav" role="tablist">
-    <button class="tab-btn" data-tab="introduction" role="tab">Introduction</button>
-    <button class="tab-btn" data-tab="works" role="tab">Publications</button>
-    <button class="tab-btn" data-tab="about" role="tab">About Me</button>
+    <span class="nav-name" id="nav-name"><strong>Guillem</strong> Masdemont Serra</span>
+    <div class="nav-links">
+      <button class="tab-btn" data-tab="introduction" role="tab">Introduction</button>
+      <button class="tab-btn" data-tab="works" role="tab">Publications</button>
+      <button class="tab-btn" data-tab="about" role="tab">About Me</button>
+    </div>
   </nav>
 
   <main>
@@ -458,6 +476,7 @@
           </figure>
         </div>
       </div>
+      </div>
     </section>
 
   </main>
@@ -477,11 +496,13 @@
   const tabButtons = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.panel');
   const validTabs = Array.from(panels).map(p => p.dataset.tab);
+  const navName = document.getElementById('nav-name');
 
   function activateTab(name) {
     if (!validTabs.includes(name)) name = 'introduction';
     tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === name));
     panels.forEach(p => p.classList.toggle('active', p.dataset.tab === name));
+    navName.style.display = name === 'introduction' ? 'none' : '';
   }
 
   tabButtons.forEach(b => b.addEventListener('click', () => {
